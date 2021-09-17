@@ -8,6 +8,10 @@ class ReadingService {
     return this.#readings;
   }
 
+  deleteReadings() {
+    this.#readings = [];
+  }
+
   insertReading(reading) {
     this.readings.push(reading);
     this.#sortReadings();
@@ -34,8 +38,6 @@ class ReadingService {
       return (r1.timestamp > r2.timestamp) ? -1 : ((r1.timestamp < r2.timestamp) ? 1 : 0);
     });
   }
-
-
 
 }
 

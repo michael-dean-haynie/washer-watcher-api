@@ -42,5 +42,10 @@ app.post('/readings', function (req, res) {
   res.status(201).send();
 });
 
+app.delete('/readings', function (req, res) {
+  readingService.deleteReadings();
+  res.status(200).send();
+});
+
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
