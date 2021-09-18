@@ -1,1 +1,11 @@
-p #{name}'s Pug source code!
+doctype html
+html
+  head
+      style
+        include ./styles/style.css
+  script(src='http://d3js.org/d3.v3.min.js')
+  body
+    h1 My Site
+    p Welcome to my super site.
+    script
+      include scripts/script.js

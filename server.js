@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const ws = require('ws');
 const path = require('path');
 const pug = require('pug');
 const ReadingService = require('./services/reading-service');
@@ -47,5 +48,29 @@ app.delete('/readings', function (req, res) {
   res.status(200).send();
 });
 
-app.listen(PORT, HOST);
+
+// Run
+const expressServer = app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
+
+
+// Web Socket Endpoints
+const wsServer = new ws.Server({ noServer: true });
+wsServer.on('connection', socket => {
+  // subscribe to readings changes
+  readingService.subscribe((readings) => {
+    socket.send(JSON.stringify(readings));
+  });
+
+  // socket.on('message', message => {
+  //   console.log(message.toString());
+  //   socket.send('Hello Client!');
+  // });
+});
+
+
+expressServer.on('upgrade', (request, socket, head) => {
+  wsServer.handleUpgrade(request, socket, head, socket => {
+    wsServer.emit('connection', socket, request);
+  });
+});
