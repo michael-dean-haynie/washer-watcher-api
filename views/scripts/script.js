@@ -2,7 +2,7 @@ let dataBuffer = [];
 const tickDuration = 1000; // ms
 
 // Create WebSocket connection.
-const socket = new WebSocket('ws://localhost:8080');
+const socket = new WebSocket(`ws://${config.apiBaseUrl}`);
 
 // Connection opened
 socket.addEventListener('open', function (event) {

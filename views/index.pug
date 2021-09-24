@@ -5,7 +5,10 @@ html
         include ./styles/style.css
   script(src='http://d3js.org/d3.v3.min.js')
   body
-    h1 My Site
+    h1 My (#{name}'s) Site
     p Welcome to my super site.
+    script.
+      // Inject configuration into client script
+      const config = JSON.parse('!{config}');
     script
       include scripts/script.js

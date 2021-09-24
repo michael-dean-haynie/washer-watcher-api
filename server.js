@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const config = require('./config');
 const ws = require('ws');
 const path = require('path');
 const pug = require('pug');
@@ -30,8 +31,7 @@ app.get('/hello', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.render('index', { name: 'Michael' });
-  // res.sendFile(path.join(__dirname, '/index.html'));
+  res.render('index', { name: 'Michael', config: JSON.stringify(config)});
 });
 
 app.get('/readings', function (req, res) {
@@ -51,7 +51,7 @@ app.delete('/readings', function (req, res) {
 
 // Run
 const expressServer = app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+console.log(`Running on http://${HOST}:${PORT}\nenvironment: "${config.env}""`);
 
 
 // Web Socket Endpoints
