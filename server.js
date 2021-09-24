@@ -20,6 +20,19 @@ const app = express();
 // Middleware
 app.use(express.json());
 
+// DEBUGGING MIDDLEWARE
+let demoLogger = (req, res, next) => {
+  console.log("LOGGING A REQUEST :)");
+  let method = req.method;
+  let url = req.url;
+  let status = res.statusCode;
+  let log = `[${new Date().toISOString()}] ${method}:${url} ${status}`;
+  console.log(log);
+  console.log(req.body);
+  next();
+};
+app.use(demoLogger);
+
 // Template Engine
 app.set('view engine', 'pug')
 app.set('views', './views')
@@ -51,7 +64,7 @@ app.delete('/readings', function (req, res) {
 
 // Run
 const expressServer = app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}\nenvironment: "${config.env}""`);
+console.log(`Running on http://${HOST}:${PORT}\nenvironment: "${config.env}"`);
 
 
 // Web Socket Endpoints
