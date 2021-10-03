@@ -49,7 +49,6 @@ class ReadingService {
     subs.forEach(subscriber => {
       let firstNewReadingIndex = 0;
       if (subscriber.lastTimestamp) {
-        console.log('subscriber.lastTimestamp', subscriber.lastTimestamp)
         firstNewReadingIndex = this.readings
           .map(reading => reading.timestamp)
           .lastIndexOf(subscriber.lastTimestamp) + 1;
