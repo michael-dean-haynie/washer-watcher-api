@@ -22,7 +22,6 @@ app.use(express.json());
 
 // DEBUGGING MIDDLEWARE
 let demoLogger = (req, res, next) => {
-  console.log("LOGGING A REQUEST :)");
   let method = req.method;
   let url = req.url;
   let status = res.statusCode;
